@@ -1,0 +1,29 @@
+img {
+    height: 200px;
+    width: max-content;
+}
+
+.tops, .bottoms  {
+    display: flex;
+    flex-direction: row;
+}
+
+.top, .bottom {
+    display: flex;
+    max-width: 25%;
+}
+
+.capsule-outfits {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.outfit {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    padding-bottom: 3rem;
+}
