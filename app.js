@@ -1,30 +1,44 @@
+//Global variables
 const topsDiv = document.querySelector('.tops');
 const bottomsDiv = document.querySelector('.bottoms');
-const capsuleOutfits = document.querySelector('.capsule-outfits');
-
+const capsuleOutfits = document.querySelector('.capsule-outfits'); 
+const buttonsDiv = document.querySelector('.buttons');
 const capsuleForm = document.querySelector('.capsule-form');
 const randomOutfitButton = document.querySelector('.random-outfit');
 const allOutfitsButton = document.querySelector('.all-outfits');
+const inputsDiv = document.querySelector('.inputs-div');
+const capsuleOutfitsH2 = document.querySelector('.capsule-outfits-h2');
+const randomOutfitDiv = document.querySelector('.random-outfit-div')
+const randomOutfitH2 = document.querySelector('.random-outfit-h2')
+const resetButton = document.querySelector('.reset-urls-button');
 
 capsuleForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const top1 = e.target[0].value;
-    const top2 = e.target[1].value;
-    const top3 = e.target[2].value;
-    const top4 = e.target[3].value;
-    const bottom1 = e.target[4].value;
-    const bottom2 = e.target[5].value;
-    const bottom3 = e.target[6].value;
-    const bottom4 = e.target[7].value;
-    const tops = [top1, top2, top3, top4]
-    const bottoms = [bottom1, bottom2, bottom3, bottom4]
-    if (e.submitter.className === "all-outfits") {    
+    const tops = [e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value];
+    const bottoms = [e.target[4].value, e.target[5].value, e.target[6].value, e.target[7].value];
+    resetButton.classList.toggle('hidden');
+    inputsDiv.classList.toggle('hidden');
+        
+    if (e.submitter.className === "all-outfits") { 
+        if (!randomOutfitH2.classList.contains('hidden')) {
+            randomOutfitH2.classList.toggle('hidden')
+        };
+        if (resetButton.classList.contains('hidden')) {
+            resetButton.classList.toggle('hidden')
+        };
+        randomOutfitDiv.innerHTML = "";
+        capsuleOutfitsH2.classList.toggle('hidden');
+        if (!inputsDiv.classList.contains('hidden')) {
+            inputsDiv.classList.toggle('hidden')
+        };
         displayCapsuleItems(tops, bottoms);
         for (let i=0; i<=bottoms.length-1; i++) {
             makeOutfit(tops, bottoms, i)
         };
     } else if (e.submitter.className === 'random-outfit') {
         randomOutfit(tops, bottoms);
+    } else if (e.submitter.className === 'resetUrlsButton') {
+        showInputs();
     }
 });
 
@@ -64,8 +78,6 @@ function displayCapsuleItems (topsArray, bottomsArray) {
     `
 }
 
-
-
 function makeOutfit (topsArray, bottomsArray, bottomsArrayIndex) {
     topsArray.forEach(top => {
         const newOutfitDiv = document.createElement('div');
@@ -87,23 +99,36 @@ function makeOutfit (topsArray, bottomsArray, bottomsArrayIndex) {
 }
 
 function randomOutfit (topsArray, bottomsArray) {
-    const randTopsArrayIndex = Math.floor(Math.random() * 3);
-    const randBottomsArrayIndex = Math.floor(Math.random() * 3);
+    randomOutfitDiv.innerHTML = "";
+    let randTopsArrayIndex = Math.floor(Math.random() * 3);
+    let randBottomsArrayIndex = Math.floor(Math.random() * 3);
     const newOutfitDiv = document.createElement('div');
     const topDiv = document.createElement('div');
     const bottomDiv = document.createElement('div');
-    capsuleOutfits.innerHTML = ""
+    capsuleOutfits.innerHTML = "";
+    if (randomOutfitH2.classList.contains('hidden')) {
+        randomOutfitH2.classList.toggle('hidden')
+    };
+    if (!inputsDiv.classList.contains('hidden')) {
+        inputsDiv.classList.toggle('hidden')
+    };
+    if (!capsuleOutfitsH2.classList.contains('hidden')) {
+        capsuleOutfitsH2.classList.toggle('hidden');
+    };
+    if (resetButton.classList.contains('hidden')) {
+        resetButton.classList.toggle('hidden');
+    };
     topDiv.classList.add('top');
     bottomDiv.classList.add('bottom');
     newOutfitDiv.classList.add('outfit');
-    const imgTop = document.createElement('img');
+    let imgTop = document.createElement('img');
     imgTop.src = topsArray[randTopsArrayIndex];
-    const imgBottom = document.createElement('img');
+    let imgBottom = document.createElement('img');
     imgBottom.src = bottomsArray[randBottomsArrayIndex];
     topDiv.appendChild(imgTop);
     bottomDiv.appendChild(imgBottom);
     newOutfitDiv.appendChild(topDiv);
     newOutfitDiv.appendChild(bottomDiv);
-    capsuleOutfits.appendChild(newOutfitDiv); 
+    randomOutfitDiv.appendChild(newOutfitDiv); 
 
 }

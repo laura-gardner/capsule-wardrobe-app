@@ -5,6 +5,10 @@ body {
     flex-direction: column;
 }
 
+.hidden {
+    display: none;
+}
+
 .capsule-form {
     display: flex;
     flex-direction: column;
