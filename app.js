@@ -11,11 +11,25 @@ const capsuleOutfitsH2 = document.querySelector('.capsule-outfits-h2');
 const randomOutfitDiv = document.querySelector('.random-outfit-div')
 const randomOutfitH2 = document.querySelector('.random-outfit-h2')
 const resetButton = document.querySelector('.reset-urls-button');
+const tops = [];
+const bottoms = [];
+
+function updateItemArrays(e) {
+    const newTops = [e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value];
+    const newBottoms = [e.target[4].value, e.target[5].value, e.target[6].value, e.target[7].value];
+    tops.splice(0, tops.lenth);
+    bottoms.splice(0, bottoms.length);
+    newTops.forEach(top => {
+        tops.push(top);
+    })
+    newBottoms.forEach(bottom => {
+        bottoms.push(bottom);
+    })
+}
 
 capsuleForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    const tops = [e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value];
-    const bottoms = [e.target[4].value, e.target[5].value, e.target[6].value, e.target[7].value];
+    updateItemArrays(e);
     resetButton.classList.toggle('hidden');
     inputsDiv.classList.toggle('hidden');
         
